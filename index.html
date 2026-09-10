@@ -199,8 +199,8 @@ function badges(d){
   if (d.status === 'inactive') out.push(`<span class="b">delisted</span>`);
   if (d.freeway_miles != null) {
     const min = DATA.freeway_min_miles || 1;
-    const cls = d.freeway_miles < min ? 'fwy-near' : (d.freeway_miles < min*1.5 ? 'fwy-mid' : 'fwy-ok');
-    out.push(`<span class="b ${cls}" title="approximate straight-line distance">~${d.freeway_miles} mi · ${esc(d.freeway_name||'fwy')}</span>`);
+    const cls = d.freeway_miles >= min ? 'fwy-ok' : (d.freeway_miles < 0.5 ? 'fwy-near' : 'fwy-mid');
+    out.push(`<span class="b ${cls}" title="approx. straight-line distance; your line is ${min} mi">~${d.freeway_miles} mi · ${esc(d.freeway_name||'fwy')}</span>`);
   }
   ['studio','yard','location','condition','lot','parking','extras'].forEach(k=>{
     const v = d['score_'+k];
